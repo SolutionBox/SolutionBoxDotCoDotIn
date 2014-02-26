@@ -21,6 +21,7 @@
     $query=mysql_query("insert into deven_contact_data(id)values('$id')");
     
       foreach ($_POST as $param_name => $param_val) {
+        $param_val=mysql_real_escape_string($param_val);
        // echo "update deven_perso_data set $param_name=$param_val where id=$id";
         $query=mysql_query("update deven_contact_data set $param_name='$param_val' where id=$id");      
           
@@ -41,10 +42,13 @@
 
     <!-- Le styles -->
     <link href="http://getbootstrap.com/2.3.2/assets/css/bootstrap.css" rel="stylesheet">
+            <link href="http://fonts.googleapis.com/css?family=Lato:400"  rel="stylesheet" type="text/css">
+
     <style type="text/css">
       body {
         padding-top: 20px;
         padding-bottom: 40px;
+        font-family: Lato!important;
       }
 
       /* Custom container */
@@ -147,18 +151,18 @@
 
           <h4>Please fill the form, we will definitely get back to you soon</h4>
           <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
-           <form role="form" method="post" action="contact.php">
+           <form role="form" method="post" action="contact.php" onsubmit="return contactForm()">
                         <div class="form-group">
-                            <input name="name" class="form-control input-lg" type="text" placeholder="Your Name" style="font-size:15px;border:1px solid #999999;">
+                            <input name="name" id="name" class="form-control input-lg" type="text" placeholder="Your Name" style="font-size:15px;border:1px solid #999999;">
                         </div>
                         <div class="form-group">
-                            <input name="email" class="form-control input-lg" type="Email" placeholder="Email Address" style="font-size:15px;border:1px solid #999999;">
+                            <input name="email" id="email" class="form-control input-lg" type="Email" placeholder="Email Address" style="font-size:15px;border:1px solid #999999;">
                         </div>
                         <div class="form-group">
-                            <input name="phone" class="form-control input-lg" type="text" placeholder="Telephone Number" style="font-size:15px;border:1px solid #999999;">
+                            <input name="phone" id="phone" class="form-control input-lg" type="text" placeholder="Telephone Number" style="font-size:15px;border:1px solid #999999;">
                         </div>
                         <div class="form-group">
-                            <textarea name="message" class="form-control" rows="3" placeholder="Your Message" style="font-size:15px;border:1px solid #999999;"></textarea>
+                            <textarea name="message" id="message" class="form-control" rows="3" placeholder="Your Message" style="font-size:15px;border:1px solid #999999;"></textarea>
                         </div>
                         <div style="text-align:right">
                             <input type="submit" class="btn btn-success" type="button"></button>
@@ -205,6 +209,7 @@
     <script src="http://getbootstrap.com/2.3.2/assets/js/bootstrap-collapse.js"></script>
     <script src="http://getbootstrap.com/2.3.2/assets/js/bootstrap-carousel.js"></script>
     <script src="http://getbootstrap.com/2.3.2/assets/js/bootstrap-typeahead.js"></script>
+    <script src="js/form_validator.js"></script>
 
   </body>
 </html>
